@@ -19,20 +19,19 @@ TITLE= 'Select the Excel file that contains the data you want to bring into MATL
 full_filename = fullfile( filepath, filename );
 
 %Reading in the data from the file
-data_matrix = xlsread(full_filename);
+data_matrix = xlsread(full_filename)
 
 % Extract the first column of data as a vector
-radius = data_matrix(:,1);
+radius = data_matrix(:,2)
 
 % Extract the second column of data as a vector
-radius_unc = data_matrix(:,2);
+radius_unc = data_matrix(:,3)
 
 % Extract the first column of data as a vector
-distance = data_matrix(:,3);
+distance = data_matrix(:,4)
 
 % Extract the second column of data as a vector
-distance_unc = data_matrix(:,4);
-
+distance_unc = data_matrix(:,5)
 
 
 %% Rename variables
@@ -60,7 +59,7 @@ p_unc = 2.08e-16*r_actual_unc;          %units: g*cm/s, data type: column vector
 
 %% Convert s and unc_s to KE (kinetic energy) and unc_KE (unc in KE)
 slope = (0.04e-5);             %units: erg/cm, data type: scalar
-intercept = 1.04;              %units: erg, data type: scalar
+intercept = 7e-7;              %units: erg, data type: scalar
 
 KE = slope*s_actual + intercept;        %units: erg, data type: vector
 KE_unc = slope*s_actual_unc;            %units: erg, data type: vector
@@ -82,13 +81,13 @@ hold on
 
 %Plot theory curves with data
 %Classical theory
-p_class = 0:0.1e-16:10e-16;
+p_class = 0:0.1e-16:5e-16;
 
 KE_class = p_class.^2/(2*m);                  %units: erg, data type: vector
 plot(p_class, KE_class)
 
 %Relativistic theory
-p_rel = 0:0.1e-16:10e-16;
+p_rel = 0:0.1e-16:20e-16;
 
 KE_rel = sqrt((m*c^2)^2+(p_rel*c).^2)-(m*c^2);   %units: erg, data type: vector
 plot(p_rel, KE_rel)
