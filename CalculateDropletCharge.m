@@ -2,33 +2,23 @@
 %
 % Author: Daniel Opdahl
 % Last modified: 11/2/2019
-% Purpose: Takes user input of a velocity of an oil drop and the viscosity of air
+% Purpose: Takes user input of Milikan Oil Drop experiment
 % in order to calculate the charge on the droplet for the Millikan Oil Drop
 % Experiment.
 
-% % % Calculate droplet radius
-
-% % % prompt = {'Input the measured velocity down (mm/s)','Input the measured velocity up (mm/s)','Input the measured resistance converted to degrees Celcius'};
-% % % dlg_title = 'Input parameters';
-% % % num_lines = 1;
-% % % answer = inputdlg(prompt, dlg_title, num_lines);
-% % % velocity_down = answer(1); %(mm/s)
-% % % velocity_up = answer(2); %(mm/s)
-% % % temp = answer(3); %(C)
-
-
-% Create array for charge values to be stored in
+% Create arrays for charge values to be stored in
 
 collected_charges = [];
+collected_charges_unc = [];
 
-% Manually inputted data for ______
-down_velos = [];
-down_velos_unc = [];
-up_velos = [];
-up_velos_unc = [];
-measured_viscosity = ;
-measured_viscosity_unc = ;
-measured_voltage = ;
+% Manually inputted data
+down_velos = [0.0187577];
+down_velos_unc = [0.0000546];
+up_velos = [0.0306450];
+up_velos_unc = [0.0000954];
+measured_viscosity = 1.819;
+measured_viscosity_unc = 0.003;
+measured_voltage = 200;
 measured_voltage_unc = 1;
 
 % Use a for loop to run through all our manually inputted data
@@ -47,6 +37,7 @@ for i = 1:length(down_velos)
     velocity_down = velocity_down * 0.001; %(m/s)
     velocity_up = velocity_up * 0.001; %(m/s)
     viscosity_air = viscosity_air * 10^-5; %(Nsm^-2)
+    measured_viscosity_unc = measured_viscosity_unc * 10^-5;
 
     density_oil = 886; %(kg/m^3)
     g = 9.81; %(m/s^2)
@@ -68,7 +59,7 @@ for i = 1:length(down_velos)
     % Calculate charge on droplet and add to collection
 
     charge = (6*pi*viscosity_air*droplet_radius * (velocity_up + velocity_down) * plate_separation) / (voltage)
-    collected_charges.append(charge)
+    collected_charges(i) = charge;
     
     % Define partial derivatives for droplet charge uncertainty
     
@@ -87,7 +78,7 @@ for i = 1:length(down_velos)
     % Calculate uncertainty in droplet charge
     
     charge_unc = sqrt( (dqDviscosity_air*measured_viscosity_unc)^2 + (dqDdroplet_radius*droplet_radius_unc)^2 + (dqDvelocity_up*down_velos_unc(i))^2 + (dqDvelocity_down*down_velos_unc(i))^2 + (dqDplate_separation*plate_separation_unc)^2 + (dqDvoltage*measured_voltage_unc)^2 )
-    
+    collected_charges_unc(i) = charge_unc;
 end
 
 
