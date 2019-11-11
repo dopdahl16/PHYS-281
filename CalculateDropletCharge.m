@@ -12,12 +12,12 @@ collected_charges = [];
 collected_charges_unc = [];
 
 % Manually inputted data
-down_velos = [];
-down_velos_unc = [];
-up_velos = [];
-up_velos_unc = [];
-measured_viscosity = 1.819;
-measured_viscosity_unc = 0.1;
+down_velos = [0.0079787];
+down_velos_unc = [0.0000225];
+up_velos = [0.109798];
+up_velos_unc = [0.0003238];
+measured_viscosity = 1.829;
+measured_viscosity_unc = 0.05;
 measured_voltage = 200;
 measured_voltage_unc = 1;
 
@@ -33,7 +33,7 @@ for i = 1:length(down_velos)
     velocity_up_unc = up_velos_unc(i); %(mm/s)
     viscosity_air = measured_viscosity; %(Nsm^-2 * 10^-5)
     plate_separation = 0.00745; %(m)
-    plate_separation_unc = 0.00005; %(m)
+    plate_separation_unc = 0.00001; %(m)
     voltage = measured_voltage; %(volts)
 
     velocity_down = velocity_down * 0.001; %(m/s)
