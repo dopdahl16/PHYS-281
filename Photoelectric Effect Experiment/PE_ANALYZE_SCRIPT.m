@@ -55,6 +55,9 @@ voltagetouse577 = forward_voltage_V577(1:301);
 
 figure
 plot(voltagetouse577, averagecurrent577);
+title("Positive Current vs. Voltage (577nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 
 p = polyfit(voltagetouse577, averagecurrent577', 2);
@@ -63,7 +66,8 @@ plot(voltagetouse577, y1);
 y2 = polyval(p,linspace(0,60,602));
 plot(linspace(0,60,602),y2);
 q = polyder(p);
-r = roots(q);
+disp("Plateau 577")
+r = roots(q)
 hold off;
 
 
@@ -81,6 +85,9 @@ voltagetouse546 = forward_voltage_V546(1:301);
 
 figure
 plot(voltagetouse546, averagecurrent546);
+title("Positive Current vs. Voltage (546nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 
 p = polyfit(voltagetouse546, averagecurrent546', 2);
@@ -89,7 +96,8 @@ plot(voltagetouse546, y1);
 y2 = polyval(p,linspace(0,60,602));
 plot(linspace(0,60,602),y2);
 q = polyder(p);
-r = roots(q);
+disp("Plateau 546")
+r = roots(q)
 hold off;
 
 
@@ -107,6 +115,9 @@ voltagetouse436 = forward_voltage_V436(1:301);
 
 figure
 plot(voltagetouse436, averagecurrent436);
+title("Positive Current vs. Voltage (436nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 
 p = polyfit(voltagetouse436, averagecurrent436', 2);
@@ -115,7 +126,8 @@ plot(voltagetouse436, y1);
 y2 = polyval(p,linspace(0,60,602));
 plot(linspace(0,60,602),y2);
 q = polyder(p);
-r = roots(q);
+disp("Plateau 436")
+r = roots(q)
 hold off;
 
 
@@ -133,6 +145,9 @@ voltagetouse405 = forward_voltage_V405(1:301);
 
 figure
 plot(voltagetouse405, averagecurrent405);
+title("Positive Current vs. Voltage (405nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 
 p = polyfit(voltagetouse405, averagecurrent405', 2);
@@ -141,7 +156,8 @@ plot(voltagetouse405, y1);
 y2 = polyval(p,linspace(0,60,602));
 plot(linspace(0,60,602),y2);
 q = polyder(p);
-r = roots(q);
+disp("Plateau 405")
+r = roots(q)
 hold off;
 
 
@@ -159,6 +175,9 @@ voltagetouse365 = forward_voltage_V365(1:301);
 
 figure
 plot(voltagetouse365, averagecurrent365');
+title("Positive Current vs. Voltage (365nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 
 p = polyfit(voltagetouse365, averagecurrent365', 2);
@@ -167,7 +186,8 @@ plot(voltagetouse365, y1);
 y2 = polyval(p,linspace(0,60,602));
 plot(linspace(0,60,602),y2);
 q = polyder(p);
-r = roots(q);
+disp("Plateau 365")
+r = roots(q)
 hold off;
 
 
@@ -188,6 +208,9 @@ voltagetouse_reverse_577 = -voltagetouse_reverse_577;
 
 figure
 plot(voltagetouse_reverse_577, averagecurrent_reverse_577)
+title("Negative Current vs. Voltage (577nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 p = polyfit(voltagetouse_reverse_577, averagecurrent_reverse_577', 25);
 y1 = polyval(p,voltagetouse_reverse_577);
@@ -209,6 +232,9 @@ voltagetouse_reverse_546 = -voltagetouse_reverse_546;
 
 figure
 plot(voltagetouse_reverse_546, averagecurrent_reverse_546)
+title("Negative Current vs. Voltage (546nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 p = polyfit(voltagetouse_reverse_546, averagecurrent_reverse_546', 25);
 y1 = polyval(p,voltagetouse_reverse_546);
@@ -230,6 +256,9 @@ voltagetouse_reverse_436 = -voltagetouse_reverse_436;
 
 figure
 plot(voltagetouse_reverse_436, averagecurrent_reverse_436)
+title("Negative Current vs. Voltage (436nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 p = polyfit(voltagetouse_reverse_436, averagecurrent_reverse_436', 25);
 y1 = polyval(p,voltagetouse_reverse_436);
@@ -251,6 +280,9 @@ voltagetouse_reverse_405 = -voltagetouse_reverse_405;
 
 figure
 plot(voltagetouse_reverse_405, averagecurrent_reverse_405)
+title("Negative Current vs. Voltage (405nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 p = polyfit(voltagetouse_reverse_405, averagecurrent_reverse_405', 25);
 y1 = polyval(p,voltagetouse_reverse_405);
@@ -272,6 +304,9 @@ voltagetouse_reverse_365 = -voltagetouse_reverse_365;
 
 figure
 plot(voltagetouse_reverse_365, averagecurrent_reverse_365)
+title("Negative Current vs. Voltage (365nm Filter)")
+xlabel('Voltage (V)') 
+ylabel('Current (A)')
 hold on;
 p = polyfit(voltagetouse_reverse_365, averagecurrent_reverse_365', 25);
 y1 = polyval(p,voltagetouse_reverse_365);
