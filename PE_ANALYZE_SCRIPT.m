@@ -559,8 +559,12 @@ current_standard_error_365 = current_standard_dev_365/ sqrt(3);
 
 % Find imax
 figure
-g = fittype('a-b*exp(-c*x)');
+fitop = fitoptions('Method','NonlinearLeastSquares',...
+               'StartPoint',[4e-8 4e-10 0.04]);
+g = fittype('a-b*exp(-c*x)','options',fitop);
+% g = fittype('a-b*exp(-c*x)');
 f0 = fit(voltagetouse365,averagecurrent365',g);
+f0_coeff = coeffvalues(f0);
 plot(f0,voltagetouse365,averagecurrent365');
 
 
