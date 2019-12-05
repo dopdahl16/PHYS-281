@@ -230,7 +230,9 @@ fitop_546 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 4e-10
 imax_fittype_546 = fittype('a-b*exp(-c*x)','options',fitop_546);
 imax_546_fit = fit(voltagetouse546,averagecurrent546',imax_fittype_546);
 imax_546_fit_coeff = coeffvalues(imax_546_fit);
-plot(imax_546_fit,voltagetouse546,averagecurrent546');
+errorbar(voltagetouse546, averagecurrent546',current_standard_error_546,current_standard_error_546,voltage_unc_546,voltage_unc_546);
+hold on;
+plot(imax_546_fit);
 imax_546 = imax_546_fit_coeff(1);
 title("Fitted Exponential Curve to Current vs. Voltage (546nm Filter)")
 xlabel('Voltage (V)') 
@@ -322,7 +324,7 @@ ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_546 * ones(1, length(x));
-plot(x, Z, 'r', 'LineWidth', 2)
+plot(x, Z)
 
 % Find knee using intersection of flat slopes
 
@@ -386,7 +388,9 @@ fitop_436 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 4e-10
 imax_fittype_436 = fittype('a-b*exp(-c*x)','options',fitop_436);
 imax_436_fit = fit(voltagetouse436,averagecurrent436',imax_fittype_436);
 imax_436_fit_coeff = coeffvalues(imax_436_fit);
-plot(imax_436_fit,voltagetouse436,averagecurrent436');
+errorbar(voltagetouse436, averagecurrent436',current_standard_error_436,current_standard_error_436,voltage_unc_436,voltage_unc_436);
+hold on;
+plot(imax_436_fit);
 imax_436 = imax_436_fit_coeff(1);
 title("Fitted Exponential Curve to Current vs. Voltage (436nm Filter)")
 xlabel('Voltage (V)') 
@@ -478,7 +482,7 @@ ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_436 * ones(1, length(x));
-plot(x, Z, 'r', 'LineWidth', 2)
+plot(x, Z)
 
 % Find knee using intersection of flat slopes
 
@@ -542,7 +546,9 @@ fitop_405 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 4e-10
 imax_fittype_405 = fittype('a-b*exp(-c*x)','options',fitop_405);
 imax_405_fit = fit(voltagetouse405,averagecurrent405',imax_fittype_405);
 imax_405_fit_coeff = coeffvalues(imax_405_fit);
-plot(imax_405_fit,voltagetouse405,averagecurrent405');
+errorbar(voltagetouse405, averagecurrent405',current_standard_error_405,current_standard_error_405,voltage_unc_405,voltage_unc_405);
+hold on;
+plot(imax_405_fit);
 imax_405 = imax_405_fit_coeff(1);
 title("Fitted Exponential Curve to Current vs. Voltage (405nm Filter)")
 xlabel('Voltage (V)') 
@@ -634,7 +640,7 @@ ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_405 * ones(1, length(x));
-plot(x, Z, 'r', 'LineWidth', 2)
+plot(x, Z)
 
 % Find knee using intersection of flat slopes
 
@@ -699,7 +705,9 @@ fitop_365 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 4e-10
 imax_fittype_365 = fittype('a-b*exp(-c*x)','options',fitop_365);
 imax_365_fit = fit(voltagetouse365,averagecurrent365',imax_fittype_365);
 imax_365_fit_coeff = coeffvalues(imax_365_fit);
-plot(imax_365_fit,voltagetouse365,averagecurrent365');
+errorbar(voltagetouse365, averagecurrent365',current_standard_error_365,current_standard_error_365,voltage_unc_365,voltage_unc_365);
+hold on;
+plot(imax_365_fit);
 imax_365 = imax_365_fit_coeff(1);
 title("Fitted Exponential Curve to Current vs. Voltage (365nm Filter)")
 xlabel('Voltage (V)') 
@@ -791,7 +799,7 @@ ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_365 * ones(1, length(x));
-plot(x, Z, 'r', 'LineWidth', 2)
+plot(x, Z)
 
 % Find knee using intersection of flat slopes
 
@@ -821,3 +829,13 @@ x = [-2 : 0.5 : 0];
 Z_365 = average_threshold_point_365 * ones(1, length(x));
 plot(x, Z_365)
 grid on;
+
+
+% TODO
+% Plot stopping voltage vs light frequency
+% Chose colors of graphs
+% Check graph titles and change scales
+% Tweak and adjust the coefficients used in finding imax
+% Change the ranges used in finding the slopes of the lines used to find
+% the knee under sections: Calculate average data point, calculate average
+% error bar size, calculate standard deviation, calculating slope of top line 
