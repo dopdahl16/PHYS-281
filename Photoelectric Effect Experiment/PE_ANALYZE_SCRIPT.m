@@ -329,8 +329,8 @@ plot(x, Z)
 % Find knee using intersection of flat slopes
 
 % Calculating slope of top line
-k546 = averagecurrent_reverse_546(1:8);
-j546 = voltagetouse_reverse_546(1:8);
+k546 = averagecurrent_reverse_546(5:20);
+j546 = voltagetouse_reverse_546(5:20);
 
 % Plot intersection of lines
 figure
@@ -836,44 +836,55 @@ grid on;
 
 
 
-%%%%% Manually input the stopping potentials taken by inspection
+% stopping voltage vs. frequency plotting
 
-%%% 577
-% Bar
-bar_577 = -0.450;
-% Intersection
-intersect_577 = -0.475;
+two_line_stop_V = [0.47, 0.76, 0.92, 1.11, 1.25];
+one_line_stop_V = [0.45, 0.45, 0.85, 0.96, 1.35];
 
-%%% 546
-% Bar
-bar_546 = -0.450;
-% Intersection
-intersect_546 = -0.500
+% Average values from both methods
+avg_stop_V = [0.46, 0.605, 0.885, 1.035, 1.3];
 
-%%% 436
-% Bar
-bar_436 = -0.800;
-% Intersection
-intersect_436 = -0.924;
+frequency = [5.20*10^14, 5.49*10^14, 6.88*10^14, 7.41*10^14, 8.22*10^14];
 
-%%% 405
-% Bar
-bar_405 = -0.95;
-% Intersection
-intersect_405 = -1.105;
+figure
+plot(frequency, avg_stop_V,'o')
+hold on;
+fit1 = polyfit(frequency,avg_stop_V,1);
+xFit = linspace(0, 8.5e14, 100);
+yFit1 = polyval(fit1, frequency);
+plot(frequency,yFit1)
+title("Averaged Stopping Voltage vs. Light Frequency with Two linear Fits")
+xlabel("Light Frequency (Hz)")
+ylabel("Stopping Voltage (V)")
+grid on;
+hold off;
+work_func = -fit1(2)
 
-%%% 365
-% Bar
-bar_365 = -1.25;
-% Intersection
-intersect_365 = -1.25;
+figure
+plot(frequency, two_line_stop_V,'o')
+hold on;
+fit1 = polyfit(frequency,two_line_stop_V,1);
+xFit = linspace(0, 8.5e14, 100);
+yFit1 = polyval(fit1, frequency);
+plot(frequency,yFit1)
+title("Stopping Voltage vs. Light Frequency with Intersedction Method")
+xlabel("Light Frequency (Hz)")
+ylabel("Stopping Voltage (V)")
+grid on;
+hold off;
 
-
-
-
-
-
-
+figure
+plot(frequency, one_line_stop_V,'o')
+hold on;
+fit1 = polyfit(frequency,one_line_stop_V,1);
+xFit = linspace(0, 8.5e14, 100);
+yFit1 = polyval(fit1, frequency);
+plot(frequency,yFit1)
+title("Stopping Voltage vs. Light Frequency with Threshold Method")
+xlabel("Light Frequency (Hz)")
+ylabel("Stopping Voltage (V)")
+grid on;
+hold off;
 
 
 
@@ -887,7 +898,6 @@ intersect_365 = -1.25;
 
 
 % TODO
-% Plot stopping voltage vs light frequency
 % Chose colors of graphs
 % Check graph titles and change scales
 % Tweak and adjust the coefficients used in finding imax
