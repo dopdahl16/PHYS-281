@@ -831,7 +831,61 @@ plot(x, Z_365)
 grid on;
 
 
+
+
+
+
+
+%%%%% Manually input the stopping potentials taken by inspection
+%%% 577
+% Bar
+bar_577
+% Intersection
+intersect_577
+%%% 546
+% Bar
+bar_546
+% Intersection
+intersect_546
+%%% 436
+% Bar
+bar_436
+% Intersection
+intersect_436
+%%% 405
+% Bar
+bar_405
+% Intersection
+intersect_405
+%%% 365
+% Bar
+bar_365
+% Intersection
+intersect_365
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % TODO
 % Plot stopping voltage vs light frequency
 % Chose colors of graphs
-% Check graph titles and cha
+% Check graph titles and change scales
+% Tweak and adjust the coefficients used in finding imax
+% Change the ranges used in finding the slopes of the lines used to find
+% the knee under sections: Calculate average data point, calculate average
+% error bar size, calculate standard deviation, calculating slope of top line 

@@ -329,8 +329,8 @@ plot(x, Z)
 % Find knee using intersection of flat slopes
 
 % Calculating slope of top line
-k546 = averagecurrent_reverse_546(5:20);
-j546 = voltagetouse_reverse_546(5:20);
+k546 = averagecurrent_reverse_546(1:8);
+j546 = voltagetouse_reverse_546(1:8);
 
 % Plot intersection of lines
 figure
@@ -829,6 +829,61 @@ x = [-2 : 0.5 : 0];
 Z_365 = average_threshold_point_365 * ones(1, length(x));
 plot(x, Z_365)
 grid on;
+
+
+
+
+
+
+
+%%%%% Manually input the stopping potentials taken by inspection
+
+%%% 577
+% Bar
+bar_577 = -0.450;
+% Intersection
+intersect_577 = -0.475;
+
+%%% 546
+% Bar
+bar_546 = -0.450;
+% Intersection
+intersect_546 = -0.500
+
+%%% 436
+% Bar
+bar_436 = -0.800;
+% Intersection
+intersect_436 = -0.924;
+
+%%% 405
+% Bar
+bar_405 = -0.95;
+% Intersection
+intersect_405 = -1.105;
+
+%%% 365
+% Bar
+bar_365 = -1.25;
+% Intersection
+intersect_365 = -1.25;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 % TODO
