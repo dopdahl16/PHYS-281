@@ -66,16 +66,17 @@ voltage_unc_577 = 0.001*ones(size(voltagetouse577));
 current_standard_error_577 = current_standard_dev_577/ sqrt(3);
 
 % Find imax
-figure
+% figure
 fitop_577 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 8e-10 0.08]);
 imax_fittype_577 = fittype('a-b*exp(-c*x)','options',fitop_577);
 imax_577_fit = fit(voltagetouse577,averagecurrent577',imax_fittype_577);
 imax_577_fit_coeff = coeffvalues(imax_577_fit);
-errorbar(voltagetouse577, averagecurrent577',current_standard_error_577,current_standard_error_577,voltage_unc_577,voltage_unc_577);
+% errorbar(voltagetouse577, averagecurrent577',current_standard_error_577,current_standard_error_577,voltage_unc_577,voltage_unc_577);
 hold on;
-plot(imax_577_fit);
+% plot(imax_577_fit);
+grid on;
 imax_577 = imax_577_fit_coeff(1);
-title("Fitted Exponential Curve to Current vs. Voltage (577nm Filter)")
+title("Fitted Exponential Curve to Forward Bias Current vs. Voltage (577nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
@@ -105,26 +106,27 @@ voltage_unc_reverse_577 = 0.001*ones(size(voltagetouse_reverse_577));
 current_reverse_standard_error_577 = current_reverse_standard_dev_577/ sqrt(3);
 
 % Plot a figure with both data sets on one graph
-figure
-errorbar(voltagetouse577, averagecurrent577',current_standard_error_577,current_standard_error_577,voltage_unc_577,voltage_unc_577);
+% figure
+% errorbar(voltagetouse577, averagecurrent577',current_standard_error_577,current_standard_error_577,voltage_unc_577,voltage_unc_577);
 hold on;
-errorbar(voltagetouse_reverse_577, averagecurrent_reverse_577,current_reverse_standard_error_577,current_reverse_standard_error_577,voltage_unc_reverse_577,voltage_unc_reverse_577)
-plot(voltagetouse577, averagecurrent577');
-plot(voltagetouse_reverse_577, averagecurrent_reverse_577);
+% errorbar(voltagetouse_reverse_577, averagecurrent_reverse_577,current_reverse_standard_error_577,current_reverse_standard_error_577,voltage_unc_reverse_577,voltage_unc_reverse_577)
+% plot(voltagetouse577, averagecurrent577');
+% plot(voltagetouse_reverse_577, averagecurrent_reverse_577);
+grid on;
 title("Current vs. Voltage (577nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the forward bias
-figure
-errorbar(voltagetouse577, averagecurrent577',current_standard_error_577,current_standard_error_577,voltage_unc_577,voltage_unc_577);
+% figure
+% errorbar(voltagetouse577, averagecurrent577',current_standard_error_577,current_standard_error_577,voltage_unc_577,voltage_unc_577);
 title("Forward Bias Current vs. Voltage (577nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the reverse bias 
-figure
-errorbar(voltagetouse_reverse_577, averagecurrent_reverse_577,current_reverse_standard_error_577,current_reverse_standard_error_577,voltage_unc_reverse_577,voltage_unc_reverse_577)
+% figure
+% errorbar(voltagetouse_reverse_577, averagecurrent_reverse_577,current_reverse_standard_error_577,current_reverse_standard_error_577,voltage_unc_reverse_577,voltage_unc_reverse_577)
 title("Reverse Bias Current vs. Voltage (577nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
@@ -157,15 +159,16 @@ threshold_bar_577 = sqrt(uncertainty_mean_577^2 + standard_dev_577^2);
 threshold_577 = threshold_bar_577 + average_threshold_point_577;
 
 % Plot the threshold line
-figure
-errorbar(voltagetouse_reverse_577, averagecurrent_reverse_577,current_reverse_standard_error_577,current_reverse_standard_error_577,voltage_unc_reverse_577,voltage_unc_reverse_577)
-title("Reverse Bias Current vs. Voltage (577nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_577, averagecurrent_reverse_577,current_reverse_standard_error_577,current_reverse_standard_error_577,voltage_unc_reverse_577,voltage_unc_reverse_577)
+title("Threshold Value for Reverse Bias Current vs. Voltage (577nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_577 * ones(1, length(x));
-plot(x, Z)
+% plot(x, Z)
+grid on;
 
 % Find knee using intersection of flat slopes
 
@@ -174,9 +177,9 @@ k577 = averagecurrent_reverse_577(1:9);
 j577 = voltagetouse_reverse_577(1:9);
 
 % Plot intersection of lines
-figure
-errorbar(voltagetouse_reverse_577, averagecurrent_reverse_577,current_reverse_standard_error_577,current_reverse_standard_error_577,voltage_unc_reverse_577,voltage_unc_reverse_577)
-title("Reverse Bias Current vs. Voltage (577nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_577, averagecurrent_reverse_577,current_reverse_standard_error_577,current_reverse_standard_error_577,voltage_unc_reverse_577,voltage_unc_reverse_577)
+title("Slope Intersection for Reverse Bias Current vs. Voltage (577nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
@@ -186,14 +189,15 @@ c_577 = polyfit(j577,k577',1);
 xFit_577 = linspace(-2, 0, 100);
 yFit_577 = polyval(c_577, xFit_577);
 hold on;
-plot(xFit_577, yFit_577);
+% plot(xFit_577, yFit_577);
+grid on;
 
 % Plot bottom line
 x = [-2 : 0.5 : 0];
 % Use already calculated value for average_threshold_point to get bottom
 % line
 Z_577 = average_threshold_point_577 * ones(1, length(x));
-plot(x, Z_577)
+% plot(x, Z_577)
 grid on;
 
 
@@ -225,16 +229,17 @@ voltage_unc_546 = 0.001*ones(size(voltagetouse546));
 current_standard_error_546 = current_standard_dev_546/ sqrt(3);
 
 % Find imax
-figure
-fitop_546 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 4e-10 0.04]);
+% figure
+fitop_546 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[6e-8 1e-10 0.06]);
 imax_fittype_546 = fittype('a-b*exp(-c*x)','options',fitop_546);
 imax_546_fit = fit(voltagetouse546,averagecurrent546',imax_fittype_546);
 imax_546_fit_coeff = coeffvalues(imax_546_fit);
-errorbar(voltagetouse546, averagecurrent546',current_standard_error_546,current_standard_error_546,voltage_unc_546,voltage_unc_546);
+% errorbar(voltagetouse546, averagecurrent546',current_standard_error_546,current_standard_error_546,voltage_unc_546,voltage_unc_546);
 hold on;
-plot(imax_546_fit);
+% plot(imax_546_fit);
+grid on;
 imax_546 = imax_546_fit_coeff(1);
-title("Fitted Exponential Curve to Current vs. Voltage (546nm Filter)")
+title("Fitted Exponential Curve to Forward Bias Current vs. Voltage (546nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
@@ -264,26 +269,27 @@ voltage_unc_reverse_546 = 0.001*ones(size(voltagetouse_reverse_546));
 current_reverse_standard_error_546 = current_reverse_standard_dev_546/ sqrt(3);
 
 % Plot a figure with both data sets on one graph
-figure
-errorbar(voltagetouse546, averagecurrent546',current_standard_error_546,current_standard_error_546,voltage_unc_546,voltage_unc_546);
+% figure
+% errorbar(voltagetouse546, averagecurrent546',current_standard_error_546,current_standard_error_546,voltage_unc_546,voltage_unc_546);
 hold on;
-errorbar(voltagetouse_reverse_546, averagecurrent_reverse_546,current_reverse_standard_error_546,current_reverse_standard_error_546,voltage_unc_reverse_546,voltage_unc_reverse_546)
-plot(voltagetouse546, averagecurrent546');
-plot(voltagetouse_reverse_546, averagecurrent_reverse_546);
+% errorbar(voltagetouse_reverse_546, averagecurrent_reverse_546,current_reverse_standard_error_546,current_reverse_standard_error_546,voltage_unc_reverse_546,voltage_unc_reverse_546)
+% plot(voltagetouse546, averagecurrent546');
+grid on;
+% plot(voltagetouse_reverse_546, averagecurrent_reverse_546);
 title("Current vs. Voltage (546nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the forward bias
-figure
-errorbar(voltagetouse546, averagecurrent546',current_standard_error_546,current_standard_error_546,voltage_unc_546,voltage_unc_546);
+% figure
+% errorbar(voltagetouse546, averagecurrent546',current_standard_error_546,current_standard_error_546,voltage_unc_546,voltage_unc_546);
 title("Forward Bias Current vs. Voltage (546nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the reverse bias 
-figure
-errorbar(voltagetouse_reverse_546, averagecurrent_reverse_546,current_reverse_standard_error_546,current_reverse_standard_error_546,voltage_unc_reverse_546,voltage_unc_reverse_546)
+% figure
+% errorbar(voltagetouse_reverse_546, averagecurrent_reverse_546,current_reverse_standard_error_546,current_reverse_standard_error_546,voltage_unc_reverse_546,voltage_unc_reverse_546)
 title("Reverse Bias Current vs. Voltage (546nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
@@ -316,26 +322,27 @@ threshold_bar_546 = sqrt(uncertainty_mean_546^2 + standard_dev_546^2);
 threshold_546 = threshold_bar_546 + average_threshold_point_546;
 
 % Plot the threshold line
-figure
-errorbar(voltagetouse_reverse_546, averagecurrent_reverse_546,current_reverse_standard_error_546,current_reverse_standard_error_546,voltage_unc_reverse_546,voltage_unc_reverse_546)
-title("Reverse Bias Current vs. Voltage (546nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_546, averagecurrent_reverse_546,current_reverse_standard_error_546,current_reverse_standard_error_546,voltage_unc_reverse_546,voltage_unc_reverse_546)
+title("Threshold Value for Reverse Bias Current vs. Voltage (546nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_546 * ones(1, length(x));
-plot(x, Z)
+% plot(x, Z)
+grid on;
 
 % Find knee using intersection of flat slopes
 
 % Calculating slope of top line
-k546 = averagecurrent_reverse_546(5:20);
-j546 = voltagetouse_reverse_546(5:20);
+k546 = averagecurrent_reverse_546(1:8);
+j546 = voltagetouse_reverse_546(1:8);
 
 % Plot intersection of lines
-figure
-errorbar(voltagetouse_reverse_546, averagecurrent_reverse_546,current_reverse_standard_error_546,current_reverse_standard_error_546,voltage_unc_reverse_546,voltage_unc_reverse_546)
-title("Reverse Bias Current vs. Voltage (546nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_546, averagecurrent_reverse_546,current_reverse_standard_error_546,current_reverse_standard_error_546,voltage_unc_reverse_546,voltage_unc_reverse_546)
+title("Slope Intersection for Reverse Bias Current vs. Voltage (546nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
@@ -345,14 +352,15 @@ c_546 = polyfit(j546,k546',1);
 xFit_546 = linspace(-2, 0, 100);
 yFit_546 = polyval(c_546, xFit_546);
 hold on;
-plot(xFit_546, yFit_546);
+% plot(xFit_546, yFit_546);
+grid on;
 
 % Plot bottom line
 x = [-2 : 0.5 : 0];
 % Use already calculated value for average_threshold_point to get bottom
 % line
 Z_546 = average_threshold_point_546 * ones(1, length(x));
-plot(x, Z_546)
+% plot(x, Z_546)
 grid on;
 
 
@@ -383,16 +391,17 @@ voltage_unc_436 = 0.001*ones(size(voltagetouse436));
 current_standard_error_436 = current_standard_dev_436/ sqrt(3);
 
 % Find imax
-figure
-fitop_436 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 4e-10 0.04]);
+% figure
+fitop_436 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[8e-8 1e-10 0.045]);
 imax_fittype_436 = fittype('a-b*exp(-c*x)','options',fitop_436);
 imax_436_fit = fit(voltagetouse436,averagecurrent436',imax_fittype_436);
 imax_436_fit_coeff = coeffvalues(imax_436_fit);
-errorbar(voltagetouse436, averagecurrent436',current_standard_error_436,current_standard_error_436,voltage_unc_436,voltage_unc_436);
+% errorbar(voltagetouse436, averagecurrent436',current_standard_error_436,current_standard_error_436,voltage_unc_436,voltage_unc_436);
 hold on;
-plot(imax_436_fit);
+% plot(imax_436_fit);
+grid on;
 imax_436 = imax_436_fit_coeff(1);
-title("Fitted Exponential Curve to Current vs. Voltage (436nm Filter)")
+title("Fitted Exponential Curve to Forward Bias Current vs. Voltage (436nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
@@ -422,26 +431,27 @@ voltage_unc_reverse_436 = 0.001*ones(size(voltagetouse_reverse_436));
 current_reverse_standard_error_436 = current_reverse_standard_dev_436/ sqrt(3);
 
 % Plot a figure with both data sets on one graph
-figure
-errorbar(voltagetouse436, averagecurrent436',current_standard_error_436,current_standard_error_436,voltage_unc_436,voltage_unc_436);
+% figure
+% errorbar(voltagetouse436, averagecurrent436',current_standard_error_436,current_standard_error_436,voltage_unc_436,voltage_unc_436);
 hold on;
-errorbar(voltagetouse_reverse_436, averagecurrent_reverse_436,current_reverse_standard_error_436,current_reverse_standard_error_436,voltage_unc_reverse_436,voltage_unc_reverse_436)
-plot(voltagetouse436, averagecurrent436');
-plot(voltagetouse_reverse_436, averagecurrent_reverse_436);
+% errorbar(voltagetouse_reverse_436, averagecurrent_reverse_436,current_reverse_standard_error_436,current_reverse_standard_error_436,voltage_unc_reverse_436,voltage_unc_reverse_436)
+% plot(voltagetouse436, averagecurrent436');
+% plot(voltagetouse_reverse_436, averagecurrent_reverse_436);
+grid on;
 title("Current vs. Voltage (436nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the forward bias
-figure
-errorbar(voltagetouse436, averagecurrent436',current_standard_error_436,current_standard_error_436,voltage_unc_436,voltage_unc_436);
+% figure
+% errorbar(voltagetouse436, averagecurrent436',current_standard_error_436,current_standard_error_436,voltage_unc_436,voltage_unc_436);
 title("Forward Bias Current vs. Voltage (436nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the reverse bias 
-figure
-errorbar(voltagetouse_reverse_436, averagecurrent_reverse_436,current_reverse_standard_error_436,current_reverse_standard_error_436,voltage_unc_reverse_436,voltage_unc_reverse_436)
+% figure
+% errorbar(voltagetouse_reverse_436, averagecurrent_reverse_436,current_reverse_standard_error_436,current_reverse_standard_error_436,voltage_unc_reverse_436,voltage_unc_reverse_436)
 title("Reverse Bias Current vs. Voltage (436nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
@@ -474,26 +484,27 @@ threshold_bar_436 = sqrt(uncertainty_mean_436^2 + standard_dev_436^2);
 threshold_436 = threshold_bar_436 + average_threshold_point_436;
 
 % Plot the threshold line
-figure
-errorbar(voltagetouse_reverse_436, averagecurrent_reverse_436,current_reverse_standard_error_436,current_reverse_standard_error_436,voltage_unc_reverse_436,voltage_unc_reverse_436)
-title("Reverse Bias Current vs. Voltage (436nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_436, averagecurrent_reverse_436,current_reverse_standard_error_436,current_reverse_standard_error_436,voltage_unc_reverse_436,voltage_unc_reverse_436)
+title("Threshold Value for Reverse Bias Current vs. Voltage (436nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_436 * ones(1, length(x));
-plot(x, Z)
+% plot(x, Z)
+grid on;
 
 % Find knee using intersection of flat slopes
 
 % Calculating slope of top line
-k436 = averagecurrent_reverse_436(5:20);
-j436 = voltagetouse_reverse_436(5:20);
+k436 = averagecurrent_reverse_436(1:11);
+j436 = voltagetouse_reverse_436(1:11);
 
 % Plot intersection of lines
-figure
-errorbar(voltagetouse_reverse_436, averagecurrent_reverse_436,current_reverse_standard_error_436,current_reverse_standard_error_436,voltage_unc_reverse_436,voltage_unc_reverse_436)
-title("Reverse Bias Current vs. Voltage (436nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_436, averagecurrent_reverse_436,current_reverse_standard_error_436,current_reverse_standard_error_436,voltage_unc_reverse_436,voltage_unc_reverse_436)
+title("Slope Intersection for Reverse Bias Current vs. Voltage (436nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
@@ -503,14 +514,15 @@ c_436 = polyfit(j436,k436',1);
 xFit_436 = linspace(-2, 0, 100);
 yFit_436 = polyval(c_436, xFit_436);
 hold on;
-plot(xFit_436, yFit_436);
+% plot(xFit_436, yFit_436);
+grid on;
 
 % Plot bottom line
 x = [-2 : 0.5 : 0];
 % Use already calculated value for average_threshold_point to get bottom
 % line
 Z_436 = average_threshold_point_436 * ones(1, length(x));
-plot(x, Z_436)
+% plot(x, Z_436)
 grid on;
 
 
@@ -541,16 +553,17 @@ voltage_unc_405 = 0.001*ones(size(voltagetouse405));
 current_standard_error_405 = current_standard_dev_405/ sqrt(3);
 
 % Find imax
-figure
+% figure
 fitop_405 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 4e-10 0.04]);
 imax_fittype_405 = fittype('a-b*exp(-c*x)','options',fitop_405);
 imax_405_fit = fit(voltagetouse405,averagecurrent405',imax_fittype_405);
 imax_405_fit_coeff = coeffvalues(imax_405_fit);
-errorbar(voltagetouse405, averagecurrent405',current_standard_error_405,current_standard_error_405,voltage_unc_405,voltage_unc_405);
+% errorbar(voltagetouse405, averagecurrent405',current_standard_error_405,current_standard_error_405,voltage_unc_405,voltage_unc_405);
 hold on;
-plot(imax_405_fit);
+% plot(imax_405_fit);
+grid on;
 imax_405 = imax_405_fit_coeff(1);
-title("Fitted Exponential Curve to Current vs. Voltage (405nm Filter)")
+title("Fitted Exponential Curve to Forward Bias Current vs. Voltage (405nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
@@ -580,26 +593,27 @@ voltage_unc_reverse_405 = 0.001*ones(size(voltagetouse_reverse_405));
 current_reverse_standard_error_405 = current_reverse_standard_dev_405/ sqrt(3);
 
 % Plot a figure with both data sets on one graph
-figure
-errorbar(voltagetouse405, averagecurrent405',current_standard_error_405,current_standard_error_405,voltage_unc_405,voltage_unc_405);
+% figure
+% errorbar(voltagetouse405, averagecurrent405',current_standard_error_405,current_standard_error_405,voltage_unc_405,voltage_unc_405);
 hold on;
-errorbar(voltagetouse_reverse_405, averagecurrent_reverse_405,current_reverse_standard_error_405,current_reverse_standard_error_405,voltage_unc_reverse_405,voltage_unc_reverse_405)
-plot(voltagetouse405, averagecurrent405');
-plot(voltagetouse_reverse_405, averagecurrent_reverse_405);
+% errorbar(voltagetouse_reverse_405, averagecurrent_reverse_405,current_reverse_standard_error_405,current_reverse_standard_error_405,voltage_unc_reverse_405,voltage_unc_reverse_405)
+% plot(voltagetouse405, averagecurrent405');
+% plot(voltagetouse_reverse_405, averagecurrent_reverse_405);
+grid on;
 title("Current vs. Voltage (405nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the forward bias
-figure
-errorbar(voltagetouse405, averagecurrent405',current_standard_error_405,current_standard_error_405,voltage_unc_405,voltage_unc_405);
+% figure
+% errorbar(voltagetouse405, averagecurrent405',current_standard_error_405,current_standard_error_405,voltage_unc_405,voltage_unc_405);
 title("Forward Bias Current vs. Voltage (405nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the reverse bias 
-figure
-errorbar(voltagetouse_reverse_405, averagecurrent_reverse_405,current_reverse_standard_error_405,current_reverse_standard_error_405,voltage_unc_reverse_405,voltage_unc_reverse_405)
+% figure
+% errorbar(voltagetouse_reverse_405, averagecurrent_reverse_405,current_reverse_standard_error_405,current_reverse_standard_error_405,voltage_unc_reverse_405,voltage_unc_reverse_405)
 title("Reverse Bias Current vs. Voltage (405nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
@@ -632,26 +646,27 @@ threshold_bar_405 = sqrt(uncertainty_mean_405^2 + standard_dev_405^2);
 threshold_405 = threshold_bar_405 + average_threshold_point_405;
 
 % Plot the threshold line
-figure
-errorbar(voltagetouse_reverse_405, averagecurrent_reverse_405,current_reverse_standard_error_405,current_reverse_standard_error_405,voltage_unc_reverse_405,voltage_unc_reverse_405)
-title("Reverse Bias Current vs. Voltage (405nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_405, averagecurrent_reverse_405,current_reverse_standard_error_405,current_reverse_standard_error_405,voltage_unc_reverse_405,voltage_unc_reverse_405)
+title("Threshold Value for Reverse Bias Current vs. Voltage (405nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_405 * ones(1, length(x));
-plot(x, Z)
+% plot(x, Z)
+grid on;
 
 % Find knee using intersection of flat slopes
 
 % Calculating slope of top line
-k405 = averagecurrent_reverse_405(5:20);
-j405 = voltagetouse_reverse_405(5:20);
+k405 = averagecurrent_reverse_405(3:16);
+j405 = voltagetouse_reverse_405(3:16);
 
 % Plot intersection of lines
-figure
-errorbar(voltagetouse_reverse_405, averagecurrent_reverse_405,current_reverse_standard_error_405,current_reverse_standard_error_405,voltage_unc_reverse_405,voltage_unc_reverse_405)
-title("Reverse Bias Current vs. Voltage (405nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_405, averagecurrent_reverse_405,current_reverse_standard_error_405,current_reverse_standard_error_405,voltage_unc_reverse_405,voltage_unc_reverse_405)
+title("Slope Intersection for Reverse Bias Current vs. Voltage (405nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
@@ -661,14 +676,15 @@ c_405 = polyfit(j405,k405',1);
 xFit_405 = linspace(-2, 0, 100);
 yFit_405 = polyval(c_405, xFit_405);
 hold on;
-plot(xFit_405, yFit_405);
+% plot(xFit_405, yFit_405);
+grid on;
 
 % Plot bottom line
 x = [-2 : 0.5 : 0];
 % Use already calculated value for average_threshold_point to get bottom
 % line
 Z_405 = average_threshold_point_405 * ones(1, length(x));
-plot(x, Z_405)
+% plot(x, Z_405)
 grid on;
 
 
@@ -700,16 +716,17 @@ voltage_unc_365 = 0.001*ones(size(voltagetouse365));
 current_standard_error_365 = current_standard_dev_365/ sqrt(3);
 
 % Find imax
-figure
-fitop_365 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[4e-8 4e-10 0.04]);
+% figure
+fitop_365 = fitoptions('Method','NonlinearLeastSquares','StartPoint',[1e-8 4e-10 0.04]);
 imax_fittype_365 = fittype('a-b*exp(-c*x)','options',fitop_365);
 imax_365_fit = fit(voltagetouse365,averagecurrent365',imax_fittype_365);
 imax_365_fit_coeff = coeffvalues(imax_365_fit);
-errorbar(voltagetouse365, averagecurrent365',current_standard_error_365,current_standard_error_365,voltage_unc_365,voltage_unc_365);
+% errorbar(voltagetouse365, averagecurrent365',current_standard_error_365,current_standard_error_365,voltage_unc_365,voltage_unc_365);
 hold on;
-plot(imax_365_fit);
+% plot(imax_365_fit);
+grid on;
 imax_365 = imax_365_fit_coeff(1);
-title("Fitted Exponential Curve to Current vs. Voltage (365nm Filter)")
+title("Fitted Exponential Curve to Forward Bias Current vs. Voltage (365nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
@@ -739,26 +756,27 @@ voltage_unc_reverse_365 = 0.001*ones(size(voltagetouse_reverse_365));
 current_reverse_standard_error_365 = current_reverse_standard_dev_365/ sqrt(3);
 
 % Plot a figure with both data sets on one graph
-figure
-errorbar(voltagetouse365, averagecurrent365',current_standard_error_365,current_standard_error_365,voltage_unc_365,voltage_unc_365);
+% figure
+% errorbar(voltagetouse365, averagecurrent365',current_standard_error_365,current_standard_error_365,voltage_unc_365,voltage_unc_365);
 hold on;
-errorbar(voltagetouse_reverse_365, averagecurrent_reverse_365,current_reverse_standard_error_365,current_reverse_standard_error_365,voltage_unc_reverse_365,voltage_unc_reverse_365)
-plot(voltagetouse365, averagecurrent365');
-plot(voltagetouse_reverse_365, averagecurrent_reverse_365);
+% errorbar(voltagetouse_reverse_365, averagecurrent_reverse_365,current_reverse_standard_error_365,current_reverse_standard_error_365,voltage_unc_reverse_365,voltage_unc_reverse_365)
+% plot(voltagetouse365, averagecurrent365');
+% plot(voltagetouse_reverse_365, averagecurrent_reverse_365);
+grid on;
 title("Current vs. Voltage (365nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the forward bias
-figure
-errorbar(voltagetouse365, averagecurrent365',current_standard_error_365,current_standard_error_365,voltage_unc_365,voltage_unc_365);
+% figure
+% errorbar(voltagetouse365, averagecurrent365',current_standard_error_365,current_standard_error_365,voltage_unc_365,voltage_unc_365);
 title("Forward Bias Current vs. Voltage (365nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 
 % Plot just the reverse bias 
-figure
-errorbar(voltagetouse_reverse_365, averagecurrent_reverse_365,current_reverse_standard_error_365,current_reverse_standard_error_365,voltage_unc_reverse_365,voltage_unc_reverse_365)
+% figure
+% errorbar(voltagetouse_reverse_365, averagecurrent_reverse_365,current_reverse_standard_error_365,current_reverse_standard_error_365,voltage_unc_reverse_365,voltage_unc_reverse_365)
 title("Reverse Bias Current vs. Voltage (365nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
@@ -791,15 +809,16 @@ threshold_bar_365 = sqrt(uncertainty_mean_365^2 + standard_dev_365^2);
 threshold_365 = threshold_bar_365 + average_threshold_point_365;
 
 % Plot the threshold line
-figure
-errorbar(voltagetouse_reverse_365, averagecurrent_reverse_365,current_reverse_standard_error_365,current_reverse_standard_error_365,voltage_unc_reverse_365,voltage_unc_reverse_365)
-title("Reverse Bias Current vs. Voltage (365nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_365, averagecurrent_reverse_365,current_reverse_standard_error_365,current_reverse_standard_error_365,voltage_unc_reverse_365,voltage_unc_reverse_365)
+title("Threshold Value for Reverse Bias Current vs. Voltage (365nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
 x = [-2 : 0.5 : 0];
 Z = threshold_365 * ones(1, length(x));
-plot(x, Z)
+% plot(x, Z)
+grid on;
 
 % Find knee using intersection of flat slopes
 
@@ -808,9 +827,9 @@ k365 = averagecurrent_reverse_365(5:20);
 j365 = voltagetouse_reverse_365(5:20);
 
 % Plot intersection of lines
-figure
-errorbar(voltagetouse_reverse_365, averagecurrent_reverse_365,current_reverse_standard_error_365,current_reverse_standard_error_365,voltage_unc_reverse_365,voltage_unc_reverse_365)
-title("Reverse Bias Current vs. Voltage (365nm Filter)")
+% figure
+% errorbar(voltagetouse_reverse_365, averagecurrent_reverse_365,current_reverse_standard_error_365,current_reverse_standard_error_365,voltage_unc_reverse_365,voltage_unc_reverse_365)
+title("Slope Intersection for Reverse Bias Current vs. Voltage (365nm Filter)")
 xlabel('Voltage (V)') 
 ylabel('Current (A)')
 hold on;
@@ -820,14 +839,15 @@ c_365 = polyfit(j365,k365',1);
 xFit_365 = linspace(-2, 0, 100);
 yFit_365 = polyval(c_365, xFit_365);
 hold on;
-plot(xFit_365, yFit_365);
+% plot(xFit_365, yFit_365);
+grid on;
 
 % Plot bottom line
 x = [-2 : 0.5 : 0];
 % Use already calculated value for average_threshold_point to get bottom
 % line
 Z_365 = average_threshold_point_365 * ones(1, length(x));
-plot(x, Z_365)
+% plot(x, Z_365)
 grid on;
 
 
@@ -836,10 +856,18 @@ grid on;
 
 
 
-% stopping voltage vs. frequency plotting
+%%%%% Stopping voltage vs. frequency analysis
 
-two_line_stop_V = [0.47, 0.76, 0.92, 1.11, 1.25];
-one_line_stop_V = [0.45, 0.45, 0.85, 0.96, 1.35];
+two_line_stop_V = [0.47, 0.50, 0.85, 1.08, 1.25];
+one_line_stop_V = [0.5, 0.5, 0.9, 1.1, 1.45];
+
+
+
+%%% THIS IS WHERE I LEFT OFF. I JUST UPDATED THE VALUES ABOVE. NEED TO
+%%% UPDATE EVERYTHING BELOW AND DO UNCERTAINTY ANALYISS
+
+
+
 
 % Average values from both methods
 avg_stop_V = [0.46, 0.605, 0.885, 1.035, 1.3];
@@ -848,6 +876,7 @@ frequency = [5.20*10^14, 5.49*10^14, 6.88*10^14, 7.41*10^14, 8.22*10^14];
 
 figure
 plot(frequency, avg_stop_V,'o')
+grid on;
 hold on;
 fit1 = polyfit(frequency,avg_stop_V,1);
 xFit = linspace(0, 8.5e14, 100);
@@ -862,11 +891,13 @@ work_func = -fit1(2)
 
 figure
 plot(frequency, two_line_stop_V,'o')
+grid on;
 hold on;
 fit1 = polyfit(frequency,two_line_stop_V,1);
 xFit = linspace(0, 8.5e14, 100);
 yFit1 = polyval(fit1, frequency);
 plot(frequency,yFit1)
+grid on;
 title("Stopping Voltage vs. Light Frequency with Intersedction Method")
 xlabel("Light Frequency (Hz)")
 ylabel("Stopping Voltage (V)")
@@ -875,6 +906,7 @@ hold off;
 
 figure
 plot(frequency, one_line_stop_V,'o')
+grid on;
 hold on;
 fit1 = polyfit(frequency,one_line_stop_V,1);
 xFit = linspace(0, 8.5e14, 100);
@@ -885,22 +917,3 @@ xlabel("Light Frequency (Hz)")
 ylabel("Stopping Voltage (V)")
 grid on;
 hold off;
-
-
-
-
-
-
-
-
-
-
-
-
-% TODO
-% Chose colors of graphs
-% Check graph titles and change scales
-% Tweak and adjust the coefficients used in finding imax
-% Change the ranges used in finding the slopes of the lines used to find
-% the knee under sections: Calculate average data point, calculate average
-% error bar size, calculate standard deviation, calculating slope of top line 
