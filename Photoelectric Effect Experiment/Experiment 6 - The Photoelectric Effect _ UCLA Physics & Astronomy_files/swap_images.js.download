@@ -1,0 +1,7 @@
+var main_path='/sites/default/files/demomanual/';
+var secondary_path;
+
+function swap(imageName,file) {
+    if(document.images && secondary_path!='' && imageName!='')
+        document[imageName].src=main_path+secondary_path+file;
+}
