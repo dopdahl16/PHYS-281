@@ -871,6 +871,7 @@ grid on;
 two_line_stop_V = [0.47, 0.50, 0.85, 1.08, 1.26];
 one_line_stop_V = [0.5, 0.5, 0.9, 1.1, 1.35];
 voltage_unc = [.05, .05, .05, .05, .05]
+average_voltage_unc = [.035, .035, .035, .035, .035]
 frequency_unc = [0, 0, 0, 0, 0]
 
 
@@ -883,7 +884,7 @@ frequency = [5.20*10^14, 5.49*10^14, 6.88*10^14, 7.41*10^14, 8.22*10^14];
 frequency_extremes = [5.20*10^14, 8.22*10^14];
 
 figure
-errorbar(frequency, avg_stop_V, voltage_unc, voltage_unc, frequency_unc, frequency_unc, 'o')
+errorbar(frequency, avg_stop_V, average_voltage_unc, average_voltage_unc, frequency_unc, frequency_unc, 'o')
 grid on;
 hold on;
 fit1 = polyfit(frequency,avg_stop_V,1);
@@ -924,7 +925,7 @@ large_slope = fit2(1)
 hold off;
 
 figure
-errorbar(frequency, two_line_stop_V, voltage_unc, voltage_unc, frequency_unc, frequency_unc, 'ro')
+errorbar(frequency, two_line_stop_V, average_voltage_unc, average_voltage_unc, frequency_unc, frequency_unc, 'ro')
 grid on;
 hold on;
 fit1 = polyfit(frequency,two_line_stop_V,1);
